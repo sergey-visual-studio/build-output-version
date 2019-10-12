@@ -1,5 +1,4 @@
 # build-output-version
-Automatically generate output VSIX package with version number
 
 Overview
 --------
