@@ -9,7 +9,7 @@ How To Use
 * Copy usysware.targets to your VSIX project root folder
 * Add usysware.targets to your VSIX project as follows:
 
-```  <Import Project="$(MSBuildProjectDirectory)\usysware.targets" />```
+```    <Import Project="$(MSBuildProjectDirectory)\usysware.targets" />```
 * Make sure usysware.targets is added after Microsoft.VsSDK.targets
 * Modify AssemblyInfo and remove AssemblyVersion and AssemblyFileVersion attributes
 
