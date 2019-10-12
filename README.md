@@ -16,4 +16,4 @@ How To Use
 Troubleshooting
 ---------------
 
-This targets file is tied to .vsixmanifest file changes. Thus it doesn't pick up on any AssemblyInfo changes. If duplicate attributes are detected then simply initiate a full project re-build.
+This targets file is tied to .vsixmanifest file changes. Thus it doesn't pick up on any AssemblyInfo changes. If project build fails due duplicate attributes error then simply initiate a full project re-build.
