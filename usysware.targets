@@ -1,4 +1,4 @@
-﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
 
 
   <!-- Build steps -->
@@ -6,7 +6,6 @@
     <CoreBuildDependsOn>
         ResolveVsixVersion;
         UpdateAssemblyInfoExFromVsix;
-        AddAssemblyInfoExToBuild;
         $(CoreBuildDependsOn);
         CopyVsixPackageWithVersion
     </CoreBuildDependsOn>
@@ -22,6 +21,7 @@
   </PropertyGroup>
 
 
+  <!-- Properties setup -->
   <PropertyGroup>
     <_AssemblyInfoEx>$(IntermediateOutputPath)AssemblyInfoEx.cs</_AssemblyInfoEx>
     <_AssemblyFileVersion Condition=" '$(_AssemblyFileVersion)'=='' ">true</_AssemblyFileVersion>
@@ -58,33 +58,11 @@
       <Output TaskParameter="Include" ItemName="_Attribute" />
     </CreateItem>
 
-    <!--
-    <ItemGroup>
-      <_Attribute Inclde="System.Reflection.AssemblyVersionAttribute">
-         <_Parameter1>$(_Version)</_Parameter1>
-      </_Attribute>
-     <_Attribute Inclde="System.Reflection.AssemblyFileVersionAttribute" Condition=" '$(_AssemblyFileVersion)'=='true' ">
-        <_Parameter1>$(_Version)</_Parameter1>
-      </_Attribute>
-    </ItemGroup>
-    -->
-    
     <WriteCodeFragment AssemblyAttributes="@(_Attribute)"
                        OutputFile="$(_AssemblyInfoEx)"
                        Language="$(Language)">
       <Output TaskParameter="OutputFile" ItemName="Compile" />
     </WriteCodeFragment>
-  </Target>
-
-
-  <!-- Setup an existing AssemblyInfoEx.cs to be compiled -->
-  <Target Name="AddAssemblyInfoExToBuild"
-          Condition=" Exists('$(_AssemblyInfoEx)') ">
-    <!--
-    <CreateItem Include="$(_AssemblyInfoEx)">
-      <Output TaskParameter="Include" ItemName="Compile" />
-    </CreateItem>
-    -->
   </Target>
 
 
