@@ -23,7 +23,7 @@
 
   <!-- Properties setup -->
   <PropertyGroup>
-    <_AssemblyInfoEx>$(IntermediateOutputPath)AssemblyInfoEx.cs</_AssemblyInfoEx>
+    <_AssemblyInfoEx>$(MSBuildProjectDirectory)\$(IntermediateOutputPath)AssemblyInfoEx.cs</_AssemblyInfoEx>
     <_AssemblyFileVersion Condition=" '$(_AssemblyFileVersion)'=='' ">true</_AssemblyFileVersion>
   </PropertyGroup>
 
@@ -57,6 +57,10 @@
                 Condition=" '$(_AssemblyFileVersion)'=='true' ">
       <Output TaskParameter="Include" ItemName="_Attribute" />
     </CreateItem>
+
+    <!-- Required for Azure DevOps (for some reason) -->
+    <MakeDir Condition="!Exists('$(MSBuildProjectDirectory)\$(IntermediateOutputPath)')"
+             Directories="$(MSBuildProjectDirectory)\$(IntermediateOutputPath)"/>
 
     <WriteCodeFragment AssemblyAttributes="@(_Attribute)"
                        OutputFile="$(_AssemblyInfoEx)"
